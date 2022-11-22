@@ -7,9 +7,9 @@
 <p>Key Words: <input data-bind="value: searchKeywords" /> URL: <input data-bind="value: searchUrl" /></p>
 <button data-bind="click: callWebScraper">Search</button>
 
-<h3 data-bind="visible: shouldShowMessage">
+@*<h3 data-bind="visible: shouldShowMessage">
     Positions found: <span data-bind="text: searchResult"></span>
-</h3>
+</h3>*@
 
 
 <script type='text/javascript' src='/lib/knockout/knockout-3.5.1.js'></script>
@@ -29,7 +29,7 @@
             type: "post", 
             success: function(result) { alert(result) }
         });
-        this.shouldShowMessage(true);
+        //this.shouldShowMessage(true);
     };
 }
 
