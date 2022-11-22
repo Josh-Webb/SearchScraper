@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model SearchScraper.Models.FormModel
+
+
+<p>Key Words: <input data-bind="value: searchKeywords" /> URL: <input data-bind="value: searchUrl" /></p>
+<button data-bind="click: callWebScraper">Search</button>
+
+<h3 data-bind="visible: shouldShowMessage">
+    Positions found: <span data-bind="text: searchResult"></span>
+</h3>
+
+
+<script type='text/javascript' src='/lib/knockout/knockout-3.5.1.js'></script>
+<script type='text/javascript'>
+
+
+    function AppViewModel(){
+
+    this.searchKeywords = ko.observable("efiling integration");
+    this.searchUrl =  ko.observable("www.infotrack.com");
+    this.shouldShowMessage = ko.observable(false);
+    this.searchResult = ko.observable();
+
+    this.callWebScraper = function(){
+        $.ajax("/WebScraper/callurl",{
+            data: { url: this.searchUrl, keywords: this.searchKeywords },
+            type: "post", 
+            success: function(result) { alert(result) }
+        });
+        this.shouldShowMessage(true);
+    };
+}
+
+
+    ko.applyBindings( new AppViewModel());
+    
+
+</script>
